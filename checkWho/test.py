@@ -1,5 +1,6 @@
 import string
 import re
+from bs4 import BeautifulSoup
 
 #DIFFERENT TEXT FILES TO CHECK
 berries = open("./texts/berry.txt",'r').read().replace("\n","")
@@ -10,7 +11,10 @@ moon = open("./texts/new_moon.txt",'r').read().replace("\n","")
 breaking = open("./texts/breaking_dawn.txt",'r').read().replace("\n","")
 hunger = open("./texts/hunger_games.txt",'r').read().replace("\n","")
 wiki = open("./texts/wiki_history_of_science.txt",'r').read().replace("\n","")
-
+hi = open("hi.html",'r').read().replace("\n","") 
+soup = BeautifulSoup(hi)
+soup = soup.get_text()
+print soup
 common_words_1000 = open("common_words_1000.txt",'r').read().splitlines()
 
 common_words_10000 = open("common_words_10000.txt",'r').read().splitlines()
@@ -62,4 +66,4 @@ def findMatches(text):
     print sortedNames
                 
 if __name__ == "__main__":
-    findMatches(berries)
+    findMatches(soup)
