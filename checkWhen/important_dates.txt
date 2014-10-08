@@ -4,6 +4,9 @@ Select the desired calendar dates from the list below:
 
     2014¨C2015
     (September 1, 2014 to August 31, 2015)
+Jan 3, 2009
+Feb 14 2014
+Nov 39 1001
     2013 ¨C 2014
     (September 1, 2013 to August 31, 2014)
     2012 ¨C 2013
@@ -17,3 +20,4 @@ Archived United Arab Emirates (UAE) dates:
     (September 1, 2012 to August 31, 2013)
     2011-2012
     (September 1, 2011 to August 31, 2012)
+9/3/1997
