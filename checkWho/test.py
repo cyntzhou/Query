@@ -31,7 +31,13 @@ common_names = r.findall(common_names_text)
 
 names = []
 sortedNames = []
-new_names = []
+dictNames = {}
+
+def addDict(n):
+    if dictNames.has_key(n):
+        dictNames[n] = dictNames[n] + 1
+    else:
+        dictNames[n] = 1
 
 def findMatches(text):
 
@@ -40,8 +46,10 @@ def findMatches(text):
     #names = n.match(text)
     #print names.group()
     names = n.findall(text)
+    print names
 
     #################SORT MATCHES
+    print "\nFILTERED NAMES:"
     n = re.compile("[A-Z][a-z]+")
     for name in names:
         first_last = n.findall(name)
@@ -53,17 +61,23 @@ def findMatches(text):
             #then check if the last name is a common word or city. if not, add to sortedNames list
             if last.upper() in common_names:
                 sortedNames.append(name)
-            elif last.upper() not in common_words_1000 and first.lower() not in common_words_10000 and last not in common_cities:
+                addDict(name)
+            elif last.upper() not in common_words_1000 and last.lower() not in common_words_10000 and last not in common_cities:
                 sortedNames.append(name)
+                addDict(name)
         elif last.upper() in common_names:
             if first.upper() not in common_words_1000 and first.lower() not in common_words_10000 and first not in common_cities:
                 sortedNames.append(name)
+                addDict(name)
         #if first name and last name are NOT in common_names, check to see if they're regular words. if not, it's probably a name so add it to the sortedNames list
         elif first.upper() not in common_words_1000 and first.lower() not in common_words_10000 and first not in common_cities and last.upper() not in common_words_1000 and last.lower() not in common_words_10000 and last not in common_cities:
             sortedNames.append(name)
+            addDict(name)
         else:
             print name
-    print sortedNames
+
                 
 if __name__ == "__main__":
     findMatches(soup)
+    print sortedNames
+    print dictNames.items()
