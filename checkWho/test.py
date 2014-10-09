@@ -14,16 +14,15 @@ wiki = open("./texts/wiki_history_of_science.txt",'r').read().replace("\n","")
 hi = open("hi.html",'r').read().replace("\n","") 
 soup = BeautifulSoup(hi)
 soup = soup.get_text()
-print soup
-common_words_1000 = open("common_words_1000.txt",'r').read().splitlines()
+common_words_1000 = open("./texts/common_words_1000.txt",'r').read().splitlines()
 
-common_words_10000 = open("common_words_10000.txt",'r').read().splitlines()
+common_words_10000 = open("./texts/common_words_10000.txt",'r').read().splitlines()
 #A LIST WITH THE 1000 MOST COMMON WORDS: FROM http://www.giwersworld.org/computers/linux/common-words.phtml
 #common_words_10000.txt comes from https://github.com/first20hours/google-10000-english/blob/master/google-10000-english.txt
 
-common_cities = open("common_cities.txt",'r').read().replace(" ","\n").splitlines()
+common_cities = open("./texts/common_cities.txt",'r').read().replace(" ","\n").splitlines()
 
-common_names_text = open("common_names.txt",'r').read()
+common_names_text = open("./texts/common_names.txt",'r').read()
 #common_names.txt from http://names.mongabay.com/female_names.htm
 #the text has names as well as numbers, so only get the names with regex
 r = re.compile("[A-Z]+")
@@ -42,14 +41,10 @@ def addDict(n):
 def findMatches(text):
 
     #################FIND MATCHES
-    n = re.compile("[A-Z][a-z]+\040[A-Z][a-z]+")
-    #names = n.match(text)
-    #print names.group()
+    n = re.compile("[A-Z][a-z]+\040[A-Z][a-z]+") #\040 is space char
     names = n.findall(text)
-    print names
 
     #################SORT MATCHES
-    print "\nFILTERED NAMES:"
     n = re.compile("[A-Z][a-z]+")
     for name in names:
         first_last = n.findall(name)
@@ -73,8 +68,6 @@ def findMatches(text):
         elif first.upper() not in common_words_1000 and first.lower() not in common_words_10000 and first not in common_cities and last.upper() not in common_words_1000 and last.lower() not in common_words_10000 and last not in common_cities:
             sortedNames.append(name)
             addDict(name)
-        else:
-            print name
 
                 
 if __name__ == "__main__":
