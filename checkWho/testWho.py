@@ -28,17 +28,18 @@ common_names_text = open("./texts/common_names.txt",'r').read()
 r = re.compile("[A-Z]+")
 common_names = r.findall(common_names_text)
 
-names = []
-sortedNames = []
-dictNames = {}
 
-def addDict(n):
+def addDict(n, dictNames):
     if dictNames.has_key(n):
         dictNames[n] = dictNames[n] + 1
     else:
         dictNames[n] = 1
 
 def findMatches(text):
+    
+    names = []
+    sortedNames = []
+    dictNames = {}
 
     #################FIND MATCHES
     n = re.compile("[A-Z][a-z]+\040[A-Z][a-z]+") #\040 is space char
@@ -56,21 +57,32 @@ def findMatches(text):
             #then check if the last name is a common word or city. if not, add to sortedNames list
             if last.upper() in common_names:
                 sortedNames.append(name)
-                addDict(name)
+                addDict(name, dictNames)
             elif last.upper() not in common_words_1000 and last.lower() not in common_words_10000 and last not in common_cities:
                 sortedNames.append(name)
-                addDict(name)
+                addDict(name, dictNames)
         elif last.upper() in common_names:
             if first.upper() not in common_words_1000 and first.lower() not in common_words_10000 and first not in common_cities:
                 sortedNames.append(name)
-                addDict(name)
+                addDict(name, dictNames)
         #if first name and last name are NOT in common_names, check to see if they're regular words. if not, it's probably a name so add it to the sortedNames list
         elif first.upper() not in common_words_1000 and first.lower() not in common_words_10000 and first not in common_cities and last.upper() not in common_words_1000 and last.lower() not in common_words_10000 and last not in common_cities:
             sortedNames.append(name)
-            addDict(name)
+            addDict(name, dictNames)
+    #return sortedNames <--LIST
+    return sortDict(dictNames) #<--DICTIONARY
 
+def sortDict(dictNames):
+    #from operator import itemgetter
+    #return sorted(dictNames.items(), key=itemgetter(1))
+    from collections import OrderedDict
+    sortedDict = OrderedDict(sorted(dictNames.items(), key=lambda t: t[1], reverse=True))
+    return sortedDict
+
+def mostCommon(text):
+    dictNames = findMatches(text)
+    return dictNames.keys()[0]
                 
 if __name__ == "__main__":
-    findMatches(soup)
-    print sortedNames
-    print dictNames.items()
+    print findMatches(hunger)
+    print mostCommon(hunger)
