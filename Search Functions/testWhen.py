@@ -46,17 +46,17 @@ def validate(date, month, day, year, sortedDates, dictDates):
     i = 0
     monthName = ""
     if month in months28:
-        if int(day) <= 29:
+        if int(day) <= 29 and int(day) > 0:
             valid = True
             i = months28.index(month)/4*4
             monthName = months28[i]
-    elif month in months30:
+    elif month in months30 and int(day) > 0:
         if int(day) <= 30:
             valid = True
             i = months30.index(month)/4*4
             monthName = months30[i]
     elif month in months31:
-        if int(day) <= 31:
+        if int(day) <= 31 and int(day) > 0:
             valid = True
             i = months31.index(month)/4*4
             monthName = months31[i]
