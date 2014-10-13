@@ -1,25 +1,30 @@
 
         
 from flask import Flask, render_template, request
+from search import searchx
 app = Flask(__name__)
 
 #def processWho(L):
 #def processWhen(L):
 
-@app.route("/", methods=["GET","POST"])
+@app.route("/") #,methods=["GET","POST"]
 def run():
-    if request.method=="GET":
+    #if request.method=="GET":
+    #button = request.form["submit"]
+    #query = request.form["search"]
+    #return redirect("/error")
+    button = request.args.get("submit",None)
+    query = request.args.get("search",None)
+    if button==None:
         return render_template("cover.html")
-    else:
-        query = request.form["search"]
-        query = query.lower()
-        terms = query.split(" ")
-        if "who" in terms:
-            processWho(terms)
-        elif "when" in terms:
-            processWhen(terms)
-        else:
-            return redirect("/error")
+    elif button=="submit":
+        answer = searchx("Who are you?")[0]
+        return render_template("results.html",query=query, answer=answer)
+
+@app.route("/results")
+def results():
+    answer = searchx("Who are you?")[0]
+    return render_template("results.html",query="Who are you?", answer=answer)
 
 @app.route("/error")
 def error():

@@ -1,62 +1,26 @@
 import string
 import re
 
-text = open("important_dates.txt",'r').read()
-
 months28 = ["February","Feb","2","02"]
 months30 = ["April","Apr","4","04","June","Jun","6","06","September","Sep","9","09","November","Nov","11","11"]
 months31 = ["January","Jan","1","01","March","Mar","3","03","May","May","5","05","July","Jul","7","07","August","Aug","8","08","October","Oct","10","10","December","Dec","12","12"]
 
-"""
 def validate(date, month, day, year, sortedDates, dictDates):
     valid = False
     i = 0
     monthName = ""
     if month in months28:
-        if int(day) <= 29:
+        if int(day) <= 29 and int(day) > 0:
             valid = True
             i = months28.index(month)/4*4
             monthName = months28[i]
-    elif month in months30:
+    elif month in months30 and int(day) > 0:
         if int(day) <= 30:
             valid = True
             i = months30.index(month)/4*4
             monthName = months30[i]
     elif month in months31:
-        if int(day) <= 31:
-            valid = True
-            i = months31.index(month)/4*4
-            monthName = months31[i]
-    if valid:
-        sortedDates.append(date)
-        if dictDates.has_key(year):
-            if dictDates.get(year).has_key(monthName):
-                if dictDates.get(year).get(monthName).has_key(day):
-                    dictDates.get(year).get(monthName)[day] += 1
-                else:
-                    dictDates.get(year).get(monthName)[day] = 1
-            else:
-                dictDates.get(year)[monthName] = {day:1}
-        else:
-            dictDates[year] = {monthName:{day:1}}
-"""
-
-def validate(date, month, day, year, sortedDates, dictDates):
-    valid = False
-    i = 0
-    monthName = ""
-    if month in months28:
-        if int(day) <= 29:
-            valid = True
-            i = months28.index(month)/4*4
-            monthName = months28[i]
-    elif month in months30:
-        if int(day) <= 30:
-            valid = True
-            i = months30.index(month)/4*4
-            monthName = months30[i]
-    elif month in months31:
-        if int(day) <= 31:
+        if int(day) <= 31 and int(day) > 0:
             valid = True
             i = months31.index(month)/4*4
             monthName = months31[i]
@@ -107,5 +71,5 @@ def mostCommon(text):
     return dictNames.keys()[0]
 
 if __name__ == "__main__":
-    print findMatches(text)
-    print mostCommon(text)
+    print findMatches("")
+    print mostCommon("")
