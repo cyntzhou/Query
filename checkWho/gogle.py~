@@ -1,7 +1,0 @@
-import google
-from urllib3 import urlopen
-from bs4 import BeautifulSoup
-g = google.search("michael huang",start =0,stop =10)
-urls= [x for x in g]
-for x in urls:
-    print x
