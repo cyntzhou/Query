@@ -1,0 +1,36 @@
+<!doctype HTML>
+
+
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+
+<style>
+  .b {background-color:blue;}
+  .g {background-color:green;}
+  .border {
+  border-style: solid;
+  border-width: medium;
+  border-color: green;
+  }
+</style>
+
+<body>
+  <h1 align=center class="b, border">
+    {% block heading %}
+    Welcome to the super awesome query machine!
+    {% endblock %}
+  </h1>
+  <br><br>
+  <div align=center>
+    {% block content %}
+    With more pure soon to come, but for now, a nice forms for you to ask with.<br><br><br><br>
+    <form class="pure-form" method = "POST">
+      <fieldset>
+        <legend>Ask away!</legend>
+	
+        <input type="query" name="searches" placeholder="Type your question here!">
+        <input type="submit" name="submit" value="submit" class="pure-button pure-button-primary">Ask!
+      </fieldset>
+    </form>
+    {% endblock %}
+  </div>
+</body>
