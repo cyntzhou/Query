@@ -21,7 +21,7 @@ def searchx(text):
             check = 0;
             
     elif ("When" in text or "when" in text):
-         while count <= 9and count < len(urls):
+         while count <= 9 and count < len(urls):
             u = urllib.urlopen(urls[count])
             soup = soup + Counter(testWhen.findMatches(u.read()))
             
@@ -32,7 +32,7 @@ def searchx(text):
            
     else:
         return ["Please include Who or When as part of the search!"]
-
+    print soup
     if(len(soup)==0):
         return ["No results","No results"]
     elif(len(soup)==1):

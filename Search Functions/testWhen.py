@@ -33,7 +33,6 @@ def validate(date, month, day, year, sortedDates, dictDates):
             dictDates[stringDate] = 1
         
 def findMatches(text):
-
     dictDates = {} #each key is a dictionary with years as keys and dictionaries as values, with months as keys and dictionaries as values, with days as keys and frequencies as values; format: {Year:{Month:{Day:Frequency}}, Year:{Month:{Day:Frequency}}, etc.}
 
     #################FIND MATCHES BASED ON MONTH, DAY, YEAR FORMAT
@@ -44,20 +43,22 @@ def findMatches(text):
     sortedDates = []
     m = re.compile("([A-Z][a-z]+)\s([0-3]?[0-9]),?\s([0-9]{4})")
     for date in dates:
+        print date
         month = m.match(date).group(1)
         day = m.match(date).group(2)
         year = m.match(date).group(3)
         validate(date, month, day, year, sortedDates, dictDates)
 
     #############FIND MATCHES BASED ON SLASH / OR DASH - FORMAT
-    n = re.compile("[0-2]?[0-9][-/][0-3]?[0-9][-/][0-9]{4}")
-    dates = n.findall(text)
-    m = re.compile("([0-2]?[0-9])[-/]([0-3]?[0-9])[-/]([0-9]{4})")
-    for date in dates:
-        month = m.match(date).group(1)
-        day = m.match(date).group(2)
-        year = m.match(date).group(3)
-        validate(date, month, day, year, sortedDates, dictDates)
+    #n = re.compile("[0-2]?[0-9][-/][0-3]?[0-9][-/][0-9]{4}")
+    #dates = n.findall(text)
+    #m = re.compile("([0-2]?[0-9])[-/]([0-3]?[0-9])[-/]([0-9]{4})")
+    #for date in dates:
+    #    print date
+    #    month = m.match(date).group(1)
+    #    day = m.match(date).group(2)
+    #    year = m.match(date).group(3)
+    #    validate(date, month, day, year, sortedDates, dictDates)
     #return sortedDates <---LIST
     return sortDict(dictDates) #<---DICTIONARY
 
