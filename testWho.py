@@ -2,11 +2,6 @@ import string
 import re
 from bs4 import BeautifulSoup
 
-#DIFFERENT TEXT FILES TO CHECK
-
-hi = open("hi.html",'r').read().replace("\n","") 
-soup = BeautifulSoup(hi)
-soup = soup.get_text()
 common_words_1000 = open("./texts/common_words_1000.txt",'r').read().splitlines()
 
 common_words_10000 = open("./texts/common_words_10000.txt",'r').read().splitlines()
@@ -72,10 +67,11 @@ def sortDict(dictNames):
     sortedDict = OrderedDict(sorted(dictNames.items(), key=lambda t: t[1], reverse=True))
     return sortedDict
 
+#returns the most frequent result
 def mostCommon(text):
     dictNames = findMatches(text)
     return dictNames.keys()[0]
                 
 if __name__ == "__main__":
-    print findMatches(hunger)
-    print mostCommon(hunger)
+    print findMatches("")
+    print mostCommon("")

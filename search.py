@@ -47,9 +47,9 @@ def searchx(text):
             check += 1
         else:
             results.append(high)
-    return  results[0]+" " + results[1]
+    return  results
+
+if __name__ == "__main__":
+    print searchx("When was Albert Einstein born?")[0]
 
 
-
-print searchx("Who plays the Green Hornet?")
-print searchx("When does winter begin?")
